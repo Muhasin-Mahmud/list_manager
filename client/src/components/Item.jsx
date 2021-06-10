@@ -1,11 +1,17 @@
-import { IconButton, Container, Card, CardHeader, CardActions } from "@material-ui/core";
+import {
+  IconButton,
+  Container,
+  Card,
+  CardHeader,
+  CardActions,
+} from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { deleteItemAction } from "../actions/itemActions";
 import { useSelector, useDispatch } from "react-redux";
-import EditIcon from "@material-ui/icons/Edit";
 
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const useStyles = makeStyles();
 
@@ -29,14 +35,17 @@ const Item = ({ listItem }) => {
         }}
       >
         <CardHeader subheader={listItem.text} />
+
         <CardActions>
           <IconButton>
-            <EditIcon color="primary" />
+            <CheckCircleIcon color="primary" />
           </IconButton>
           <IconButton>
-            <DeleteIcon color="secondary" onClick={() => handleDelete(listItem._id)} />
+            <DeleteIcon
+              color="secondary"
+              onClick={() => handleDelete(listItem._id)}
+            />
           </IconButton>
-
         </CardActions>
       </Card>
     </Container>
