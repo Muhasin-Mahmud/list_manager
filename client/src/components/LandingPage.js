@@ -6,28 +6,33 @@ import {
   Grid,
   Typography,
   Container,
-  TextField,
 } from "@material-ui/core";
-import Icon from './icon'
+import Icon from "./icon";
 import { GoogleLogin } from "react-google-login";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "../styles/authStyle";
 import Input from "./Input";
-import { useDispatch, useSelector } from "react-redux"
-import { Redirect, useHistory } from "react-router-dom"
-import { signinAction, signupAction } from '../actions/authActions'
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
+import { signinAction, signupAction } from "../actions/authActions";
 
-const initialState = { firstName: "", lastName: "", email: "", password: "", confirmPassword: "" }
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
   const classes = useStyles();
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState(initialState)
-  const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState(initialState);
+  const [isSignup, setIsSignup] = useState(false);
 
-  const errMsg = useSelector(state => state.authReducer.errorMsg);
+  let errMsg = useSelector((state) => state.authReducer.errorMsg);
 
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -36,17 +41,17 @@ const Auth = () => {
     e.preventDefault();
     if (isSignup) {
       delete formData.confirmPassword;
-      dispatch(signupAction(formData, history))
+      dispatch(signupAction(formData, history));
     } else {
       delete formData.confirmPassword;
       delete formData.firstName;
       delete formData.lastName;
-      dispatch(signinAction(formData, history))
+      dispatch(signinAction(formData, history));
     }
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const switchMode = () => {
@@ -58,8 +63,8 @@ const Auth = () => {
     const result = res?.profileObj;
     const token = res?.tokenId;
     try {
-      dispatch({ type: "AUTH", data: { result, token } })
-      history.push('/')
+      dispatch({ type: "AUTH", data: { result, token } });
+      history.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -68,14 +73,19 @@ const Auth = () => {
   const googleError = (error) => {
     console.log(error);
     console.log("Google Sign In was unsuccessful. Try Again Later");
-  }
+  };
 
-  const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated);
-  if (isAuthenticated) return <Redirect to="/homepage" />
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  if (isAuthenticated) return <Redirect to="/homepage" />;
 
   return (
     <Container component="main" maxWidth="xs">
-      <Paper className={classes.paper} elevation={3}>
+      <Paper
+        className={classes.paper}
+        elevation={3}
+      >
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -121,13 +131,27 @@ const Auth = () => {
               />
             )}
           </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-            {isSignup ? 'Sign Up' : 'Sign In'}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            {isSignup ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
             clientId="945565236077-fnpcnahscm8qn7tjiv5hprr2cueul9em.apps.googleusercontent.com"
             render={(renderProps) => (
-              <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
+              <Button
+                className={classes.googleButton}
+                color="primary"
+                fullWidth
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                startIcon={<Icon />}
+                variant="contained"
+              >
                 Google Sign In
               </Button>
             )}

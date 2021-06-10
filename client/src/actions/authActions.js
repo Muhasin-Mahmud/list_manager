@@ -37,7 +37,6 @@ export const signinAction = (formData, history) => async (dispatch) => {
           dispatch({ type: LOGIN, payload: data })
           history.push('/homepage')
      } catch (error) {
-          console.log('sign in error', error.response.data);
           dispatch({
                type: "LOGIN_FAIL",
                payload: error.response.data
@@ -49,10 +48,10 @@ export const signupAction = (formData, history) => async (dispatch) => {
 
      try {
           const { data } = await helpSignUp(formData);
-          console.log('action dataaaxx', data);
           dispatch({ type: REGISTER, payload: data })
           history.push('/homepage')
      } catch (error) {
+          console.log('-->',error.response.data);
           dispatch({
                type: "REGISTER_FAIL",
                payload: error.response.data

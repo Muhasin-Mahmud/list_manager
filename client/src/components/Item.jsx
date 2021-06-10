@@ -1,8 +1,8 @@
-import { IconButton, Container, Card, CardHeader, CardActions } from "@material-ui/core";
 import React from "react";
+import { IconButton, Container, Card, CardHeader, CardActions } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { deleteItemAction } from "../actions/itemActions";
+import { deleteItemAction, toggleItemAction } from "../actions/itemActions";
 import { useSelector, useDispatch } from "react-redux";
 import EditIcon from "@material-ui/icons/Edit";
 
@@ -17,6 +17,10 @@ const Item = ({ listItem }) => {
     dispatch(deleteItemAction(itemId));
   };
 
+  const handleToggle = item => {
+    dispatch(toggleItemAction(item));
+  }
+
   return (
     <Container>
       <Card
@@ -28,10 +32,10 @@ const Item = ({ listItem }) => {
           width: "470px",
         }}
       >
-        <CardHeader subheader={listItem.text} />
+        <CardHeader subheader={listItem.text} style={{textDecoration: listItem.status ? 'line-through' : ''}} />
         <CardActions>
           <IconButton>
-            <EditIcon color="primary" />
+            <EditIcon color="primary"  onClick={() => handleToggle(listItem)} />
           </IconButton>
           <IconButton>
             <DeleteIcon color="secondary" onClick={() => handleDelete(listItem._id)} />

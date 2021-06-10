@@ -44,7 +44,6 @@ exports.updateList = async (req, res, next) => {
 exports.deleteList = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log('id here', id);
     const listRemove = await List.findByIdAndDelete(id);
     res.json(listRemove);
   } catch (err) {
@@ -56,7 +55,7 @@ exports.deleteLists = async (req, res, next) => {
   try {
     const { userId } = req.params;
     await List.deleteMany({ userId });
-    res.send('All Lists Deleted!');
+    res.send("All Lists Deleted!");
   } catch (err) {
     next(err);
   }
@@ -70,4 +69,4 @@ exports.getListsByUserId = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-}
+};

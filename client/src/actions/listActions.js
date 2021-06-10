@@ -5,7 +5,6 @@ export const selectListAction = (list) => {
 };
 
 export const getUserListsAction = (userId) => async (dispatch) => {
-  console.log('action here', userId);
   try {
     const { data } = await helpFetchLists(userId);
     dispatch({ type: "GET_USER_LISTS", payload: data });
@@ -16,8 +15,8 @@ export const getUserListsAction = (userId) => async (dispatch) => {
 
 export const createListAction = (list) => async (dispatch) => {
   try {
-    const {data} = await helpCreateList(list);
-    dispatch({type: "CREATE_LIST", payload: data})
+    const { data } = await helpCreateList(list);
+    dispatch({ type: "CREATE_LIST", payload: data });
   } catch (error) {
     console.log(error);
   }
@@ -31,9 +30,3 @@ export const deleteListAction = (id) => async (dispatch) => {
     console.log(error);
   }
 };
-
-
-
-
-
-

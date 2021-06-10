@@ -59,7 +59,7 @@ const authReducer = (state = initialState, action) => {
     case "LOGIN_FAIL":
       localStorage.removeItem('auth-token');
       localStorage.removeItem('auth-user');
-      console.log('trying to send errrrrr', action.payload);
+      console.log('=>', action.payload);
       return {
         ...state,
         user: {},
