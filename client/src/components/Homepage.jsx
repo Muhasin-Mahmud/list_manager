@@ -14,7 +14,6 @@ const Homepage = () => {
   const userId = useSelector(state => state.authReducer.user._id);
 
   useEffect(() => {
-    console.log('effect here', userId);
     userId && dispatch(getUserListsAction(userId));
   }, [userId]);
 

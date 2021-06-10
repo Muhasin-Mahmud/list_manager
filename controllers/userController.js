@@ -21,6 +21,7 @@ exports.registerUser = async (req, res) => {
   
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    
     const newUser = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -30,9 +31,9 @@ exports.registerUser = async (req, res) => {
     });
   
     try {
-      const user = await newUser.save(); //whats the difference between .save and .create
-      const token = user.generateToken();
-      res.json({ user, token });
+        const user = await newUser.save();
+        const token = user.generateToken();
+        res.json({ user, token });
     } catch (err) {
       res.status(400).send(err);
     }

@@ -6,20 +6,20 @@ import Homepage from "./Homepage";
 import NotFound from "./NotFound";
 import Footer from "./Footer";
 import LandingPage from "./LandingPage";
-import Navbar from './Navbar'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core'
+import Navbar from "./Navbar";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'Quicksand'
-  }
-})
-
+    fontFamily: "Quicksand",
+  },
+});
 
 const App = () => {
-
-  const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
   return (
     <Router>
@@ -29,7 +29,7 @@ const App = () => {
           <Switch>
             {/* <Route path="*" component={NotFound} /> */}
             <Route path="/homepage" exact component={Homepage} />
-             <Route path="/" exact component={LandingPage} />
+            <Route path="/" exact component={LandingPage} />
           </Switch>
         </Container>
         <Footer />
