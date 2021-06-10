@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, REGISTER } from "../actions/types";
+import { LOGIN, LOGOUT, REGISTER, GOOGLE_SIGN_IN } from '../actions/types';
 
 const loggedUser = localStorage.getItem("auth-user");
 
@@ -7,30 +7,31 @@ const initialState = {
   isAuthenticated: loggedUser ? true : false,
   isLoading: false,
   token: null,
-  errorMsg: ''
-}
+  errorMsg: '',
+};
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case "USER_LOADING":
+    case 'USER_LOADING':
       return {
         ...state,
         token: localStorage.getItem('auth-token'),
-        isLoading: true
-      }
+        isLoading: true,
+      };
 
-    case "USER_LOADED":
+      case 'USER_LOADED':
       return {
         ...state,
         isAuthenticated: true,
         isLoading: false,
         errorMsg: '',
-        user: { ...state.user, ...action.payload }
-      }
+        user: { ...state.user, ...action.payload },
+      };
 
     case REGISTER:
     case LOGIN:
+      case GOOGLE_SIGN_IN:
       const { user, token } = action.payload;
       localStorage.setItem('auth-token', JSON.stringify(token));
       localStorage.setItem('auth-user', JSON.stringify(user));

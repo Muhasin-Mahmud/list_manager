@@ -65,10 +65,10 @@ export default function FormDialog({ open, setOpen }) {
               }
             />
             <DialogActions>
-              <Button type="submit" color="primary">
+              <Button type="submit" color="primary" variant="outlined" size="small" autoFocus>
                 Add
               </Button>
-              <Button onClick={handleClose} color="primary">
+              <Button onClick={handleClose} color="primary"variant="outlined" size="small" autoFocus>
                 Cancel
               </Button>
 

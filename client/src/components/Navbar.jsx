@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/logo.svg";
-import avatar from "../images/av.png";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import {
   AppBar,
@@ -8,7 +7,6 @@ import {
   Avatar,
   makeStyles,
   Typography,
-  Badge,
   IconButton,
   Container,
   Button,
@@ -30,7 +28,9 @@ const Navbar = () => {
   const [listDialogOpen, setListDialogOpen] = useState(false);
   const [itemDialogOpen, setItemDialogOpen] = useState(false);
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("auth-user")));
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("auth-user"))
+  );
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
@@ -57,7 +57,7 @@ const Navbar = () => {
             variant="h5"
           >
             Marshal
-        </Typography>
+          </Typography>
         </div>
         <Toolbar className={classes.toolbar}>
           {user ? (
@@ -66,19 +66,33 @@ const Navbar = () => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: "space-evenly",
                 alignItems: "center",
+               
               }}
             >
               <Box m={2}>
-                <Button onClick={() => setListDialogOpen(true)} style={{ color: "white" }}>
+                <Button 
+                  onClick={() => setListDialogOpen(true)}
+                  style={{ color: "white" }}
+                >
                   Add list
-              </Button>
-                <Button onClick={() => setItemDialogOpen(true)} style={{ color: "white" }}>
+                </Button>
+                <Button  
+                  onClick={() => setItemDialogOpen(true)}
+                  style={{ color: "white" }}
+                >
                   Add Item
-              </Button>
+                </Button>
               </Box>
-
+              <IconButton
+                variant="contained"
+                className={classes.logout}
+                color="secondary"
+                onClick={logout}
+              >
+                <ExitToAppIcon fontSize="large" style={{ color: "white" }} />
+              </IconButton>
               <Avatar
                 className="classes.purple"
                 alt={user.result?.name}
@@ -89,14 +103,6 @@ const Navbar = () => {
               <Typography className={classes.userName} variant="h6">
                 {user.result?.name}
               </Typography>
-              <IconButton
-                variant="contained"
-                className={classes.logout}
-                color="secondary"
-                onClick={logout}
-              >
-                <ExitToAppIcon fontSize="large" />
-              </IconButton>
             </div>
           ) : (
             " "
