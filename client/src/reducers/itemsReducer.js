@@ -21,6 +21,14 @@ export default function (state = initialState, action) {
                 ...state,
                 items: state.items.filter((item) => item._id !== action.payload)
             };
+            case "TOGGLE_ITEM":
+                const filteredItems = state.items.filter(
+                  (item) => item._id !== action.payload._id
+                );
+                return {
+                  ...state,
+                  items: [action.payload, ...filteredItems],
+                };
 
         case "CLEAR_ITEMS":
             return {

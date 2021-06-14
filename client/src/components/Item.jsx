@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { deleteItemAction } from "../actions/itemActions";
+import { deleteItemAction,toggleItemAction } from "../actions/itemActions";
 import { useSelector, useDispatch } from "react-redux";
 
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
@@ -22,6 +22,9 @@ const Item = ({ listItem }) => {
   const handleDelete = (itemId) => {
     dispatch(deleteItemAction(itemId));
   };
+  const handleToggle = item => {
+    dispatch(toggleItemAction(item));
+  }
 
   return (
     <Container>
@@ -34,11 +37,11 @@ const Item = ({ listItem }) => {
           width: "470px",
         }}
       >
-        <CardHeader subheader={listItem.text} />
+        <CardHeader subheader={listItem.text} style = {{textDecoration: listItem.status?"line-through" : ""}} />
 
         <CardActions>
           <IconButton>
-            <CheckCircleIcon color="primary" />
+            <CheckCircleIcon color="primary" onClick={() => handleToggle(listItem)} />
           </IconButton>
           <IconButton>
             <DeleteIcon

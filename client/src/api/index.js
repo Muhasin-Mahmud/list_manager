@@ -31,3 +31,5 @@ export const helpDeleteItem = async (id) => await API.delete(`items/${id}`);
 
 export const helpGoogleSignIn = async (data) =>
   await API.post('/users/googleLogin', data);
+
+  export const helpToggleItem = async (item) => await API.put(`/items`, item);

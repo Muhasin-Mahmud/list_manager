@@ -60,3 +60,13 @@ exports.deleteItems = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.toggleItem = async (req, res, next) => {
+  try {
+    const { _id } = req.body;
+    let targetItem = await Item.findByIdAndUpdate(_id, req.body, { new: true });
+    res.json(targetItem);
+  } catch (error) {
+    next(error);
+  }
+};

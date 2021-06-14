@@ -13,12 +13,10 @@ export const ItemsContainer = () => {
 
     const selectedList = useSelector((state) => state.listsReducer.selectedList);
 
-    useEffect(() => {
-        dispatch(getItemsAction(selectedList?._id))
-    }, [selectedList])
+  
 
     useEffect(() => {
-        selectedList && dispatch(getItemsAction(selectedList._id));
+        selectedList?._id && dispatch(getItemsAction(selectedList._id));
     }, [selectedList])
 
     const myItems = useSelector((state) => state.itemsReducer.items);
