@@ -4,7 +4,6 @@ module.exports = itemSchema = new Schema({
     text: {type: String, required: true},
     status: {type: Boolean, required: true},
     priority: {type: Number, required: true},
-
     listId: {
         type:Schema.Types.ObjectId,
         required: true,

@@ -25,7 +25,6 @@ export default function FormDialog({ open, setOpen }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('listId here => ', listId);
     const fullItem = { ...newItem, priority: 1, status: false, userId, listId };
     dispatch(addItemAction(listId, fullItem));
     setOpen(false);

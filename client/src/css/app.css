@@ -12,6 +12,13 @@ body {
     background-color: #D8E3E7;
 }
 
+.errMsg {
+    font-size: 16px;
+    color: red;
+    padding-top: 20px;
+    text-align: center;
+}
+
 ::-webkit-scrollbar {
     width: 0.5em;
     border-radius: 10px;

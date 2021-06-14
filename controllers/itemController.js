@@ -1,7 +1,7 @@
 const Item = require("../model/ItemModel");
 
 exports.addItem = async (req, res, next) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     const item = await Item.create(req.body);
     res.json(item);
@@ -54,8 +54,8 @@ exports.deleteItem = async (req, res, next) => {
 exports.deleteItems = async (req, res, next) => {
   try {
     const { listId } = req.params;
-    await Item.deleteMany({listId});
-    res.send('All Items Deleted !');
+    await Item.deleteMany({ listId });
+    res.send("All Items Deleted !");
   } catch (err) {
     next(err);
   }

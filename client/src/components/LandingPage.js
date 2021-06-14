@@ -22,18 +22,17 @@ const initialState = {
   lastName: '',
   email: '',
   password: '',
-  confirmPassword: '',
+  confirmPassword: ''
 };
 
 const Auth = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
-  const dispatch = useDispatch();
-  const history = useHistory();
-
-  const errMsg = useSelector(state => state.authReducer.errorMsg)
+  const errMsg = useSelector(state => state.authReducer.errorMsg);
 
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -75,10 +74,14 @@ const Auth = () => {
     console.log('Google Sign In was unsuccessful. Try Again Later');
   }
 
-  const isAuthenticated = useSelector(state => state.authReducer.isAuthenticated);
-  if (isAuthenticated) return <Redirect to="/homepage" />
+
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  if (isAuthenticated) return <Redirect to="/homepage" />;
 
   return (
+
     <Container component='main' maxWidth='xs'>
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
