@@ -1,5 +1,11 @@
 import { helpSignUp, helpSignIn, helpGoogleSignIn } from "../api";
-import { LOGIN, LOGOUT, REGISTER, GOOGLE_SIGN_IN } from "./types";
+import {
+  LOGIN,
+  REGISTER,
+  GOOGLE_SIGN_IN,
+  LOGIN_FAIL,
+  REGISTER_FAIL,
+} from "./types";
 
 export const tokenConfig = (token) => {
   const config = {
@@ -19,9 +25,13 @@ export const signinAction = (formData, history) => async (dispatch) => {
     dispatch({ type: LOGIN, payload: data });
     history.push("/homepage");
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: LOGIN_FAIL,
+      payload: error.response.data,
+    });
   }
 };
+
 export const googleSignInAction = (data, history) => async (dispatch) => {
   try {
     const res = await helpGoogleSignIn(data);
@@ -29,19 +39,21 @@ export const googleSignInAction = (data, history) => async (dispatch) => {
     history.push("/homepage");
   } catch (error) {
     dispatch({
-      type: "LOGIN_FAIL",
+      type: LOGIN_FAIL,
       payload: error.response.data,
     });
   }
 };
+
 export const signupAction = (formData, history) => async (dispatch) => {
+  const { email, firstName, lastName, password } = formData;
   try {
-    const { data } = await helpSignUp(formData);
+    const { data } = await helpSignUp({ email, firstName, lastName, password });
     dispatch({ type: REGISTER, payload: data });
     history.push("/homepage");
   } catch (error) {
     dispatch({
-      type: "REGISTER_FAIL",
+      type: REGISTER_FAIL,
       payload: error.response.data,
     });
   }
